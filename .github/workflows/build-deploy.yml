@@ -35,10 +35,10 @@ jobs:
           node-version: 16.x
       
       - name: Install NPM
-        uses: npm ci
+        run: npm ci
 
       - name: Build Project
-        uses: npm run build
+        run: npm run build
         
       - name: Setup Pages
         uses: actions/configure-pages@v4
