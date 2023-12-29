@@ -54,6 +54,8 @@ jobs:
         - name: Deploy to github pages
           id: deployment
           uses: actions/deploy-pages@v2
+          with: 
+            path: ./dist
       
     #   - name: Downloading artifact
     #     uses: actions/download-artifact@v2
