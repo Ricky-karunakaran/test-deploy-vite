@@ -56,6 +56,8 @@ jobs:
     steps:
         - name: Dowload Artifacts
           uses: actions/download-artifact@v2
+          with:
+            name: GIHUT_PAGES
           
         - name: Deploy to github pages
           id: deployment
