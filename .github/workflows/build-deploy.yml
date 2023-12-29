@@ -37,9 +37,13 @@ jobs:
         uses: actions/configure-pages@v4
   
       - name: Upload artifact
+        id: uploadArtifacts
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
+      - name: Display Artifact Id
+        run: echo ${{steps.uploadArtifacts.artifact-id}}
+
 
   # Deployment job
   deploy:
