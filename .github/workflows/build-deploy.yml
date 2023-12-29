@@ -41,9 +41,6 @@ jobs:
         uses: actions/upload-pages-artifact@v2
         with:
           path: ./dist
-      - name: Display Artifact Id
-        run: echo ${{steps.uploadArtifacts.artifact-id}}
-
 
   # Deployment job
   deploy:
@@ -54,9 +51,6 @@ jobs:
       url: ${{steps.deployment.outputs.page-url}}
     runs-on: ubuntu-latest
     steps:
-        - name: Checkout
-          uses: actions/checkout@v4
-        
         - name: Dowload Artifacts
           uses: actions/download-artifact@v2
           
