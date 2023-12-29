@@ -59,8 +59,6 @@ jobs:
         
         - name: Dowload Artifacts
           uses: actions/download-artifact@v2
-          with:
-            name: githus-pages
           
         - name: Deploy to github pages
           id: deployment
