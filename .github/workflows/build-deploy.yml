@@ -1,60 +1,58 @@
-name: Deploy GithubPages
+name: Deploy To Github Pages
 
 on:
   push:
-    branches: ["master"]
+    branches: ['master']
   workflow_dispatch:
 
+# Sets the GITHUB_TOKEN permissions to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
+# Allow one concurrent deployment
 concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  group: 'pages'
+  cancel-in-progress: true
 
 jobs:
-  # Build job
+
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubutu-latest
     steps:
+    
       - name: Checkout
         uses: actions/checkout@v4
         
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
-          node-version: 16.x
-      
+          node-version: 18
+          cache: 'npm'
+          
       - name: Install dependencies
         run: npm install
-
-      - name: Build Project
+        
+      - name: Build
         run: npm run build
         
       - name: Setup Pages
-        uses: actions/configure-pages@v4
-  
+        uses: actions/configure-pages@v3
+        
       - name: Upload artifact
-        id: uploadArtifacts
         uses: actions/upload-pages-artifact@v2
         with:
-          path: ./dist
+          # Upload dist repository
+          path: './dist'
 
-  # Deployment job
   deploy:
-    name: Deploy
-    needs: build
     environment:
       name: github-pages
-      url: ${{steps.deployment.outputs.page-url}}
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    
     steps:
-        - name: Dowload Artifacts
-          uses: actions/download-artifact@v2
-          
-        - name: Deploy to github pages
-          id: deployment
-          uses: actions/deploy-pages@v3
-
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
